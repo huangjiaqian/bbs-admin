@@ -41,8 +41,19 @@
                 const self = this;
                 self.$refs[formName].validate((valid) => {
                     if (valid) {
+                        /*
                         localStorage.setItem('ms_username',self.ruleForm.username);
                         self.$router.push('/readme');
+                        */
+                        self.$axios.post('/bbs/login/login.do', self.ruleForm).then((res) => {
+                            let result = res.data;
+                            if(result.status === 'success'){
+                                self.$router.push('/readme'); //登录成功
+                            }else{
+                                self.$message.error(result.msg);
+                                return false;
+                            }
+                        });
                     } else {
                         console.log('error submit!!');
                         return false;

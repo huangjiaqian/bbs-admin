@@ -30,9 +30,20 @@
         methods:{
             handleCommand(command) {
                 if(command == 'loginout'){
+                    /*
                     localStorage.removeItem('ms_username')
                     this.$router.push('/login');
-                }
+                    */
+                    /*
+                    self.$axios.post('/bbs/login/exit.do', self.ruleForm).then((res) => {
+                        this.$router.push('/login');
+                    });
+                    */
+                    this.$axios.get('/bbs/login/checkIsLogin').then((res) => {
+                        //this.$router.push('/login');
+                        this.$message.info(res.data);
+                    });
+            }
             }
         }
     }
